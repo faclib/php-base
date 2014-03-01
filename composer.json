@@ -15,6 +15,7 @@
         "pimple/pimple": "1.*"
     },
     "autoload": {
-        "files": ["common.php"]
+        "files": ["common.php"],
+        "classmap": ["src/lib"]
     }
 }
