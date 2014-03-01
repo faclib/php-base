@@ -1,0 +1,23 @@
+{
+    "name": "faclib/php-base-utils",
+    "description": "PHP-Base-Utils.",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Dmitriy Tyurin",
+            "email": "fobia3d@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.0"
+    },
+    "autoload": {
+        "files": ["common.php"]
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
