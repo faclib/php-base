@@ -13,7 +13,7 @@
 // Функция вызываемая при вызове dump()
 if (!isset($_ENV['dump.callback'])) {
     $_ENV['dump.callback'] = function($var) {
-        if (REMOTE_SERVER) {
+        if (@constant(REMOTE_SERVER)) {
             call_user_func('\CVarDumper::dump', $var);
             //CVarDumper::dump($var);
         } else {
@@ -182,7 +182,7 @@ function am($a)
 /**
  * Выбрать из масива определенные ключи
  *
- * @param array $array
+ * @param array $array исходный масив
  * @param array|string $keys First key
  * @param array|string Second key
  * @param array Etc...
@@ -196,19 +196,15 @@ function ak(array $array, $keys)
     $args = func_get_args();
     array_shift($args);
     foreach ($args as $k) {
-        if (!is_array($k)) {
-            $keys[] = $k;
-        } else {
-            $keys = array_merge($keys, $k);
-        }
+       $keys = am($keys, $k);
     }
     $keys = array_unique($keys);
 
-    foreach ($keys as $k) {
-        $r[$k] = $array[$k];
-    }
-
-    return $r;
+    return array_intersect_key($array, array_flip($keys));
+//    foreach ($keys as $k) {
+//        $r[$k] = $array[$k];
+//    }
+//    return $r;
 }
 
 /**
@@ -217,7 +213,7 @@ function ak(array $array, $keys)
  * @param array|string $...
  * @return array
  */
-function parseFields($var)
+function parseFields()
 {
     $array = array();
     foreach (func_get_args() as $var) {
@@ -227,7 +223,7 @@ function parseFields($var)
         $array = am($array, $var);
     }
     $array = array_unique($array);
-    return $array;
+    return array_values($array);
 }
 
 /**
@@ -237,7 +233,7 @@ function parseFields($var)
  * @param string|array $var
  * @return array
  */
-function parseNumbers($var)
+function parseNumbers()
 {
     $array = array();
     foreach (func_get_args() as $var) {
@@ -251,7 +247,7 @@ function parseNumbers($var)
         $v = (int) $v;
     });
     $array = array_unique($array);
-    return $array;
+    return array_values($array);
 }
 
 /**
@@ -319,31 +315,4 @@ function dispatchMethod($o, $method, array $p = null)
         case 5: return $o->{$method}($p[0], $p[1], $p[2], $p[3], $p[4]);
         default: return call_user_func_array(array($o, $method), $p);
     }
-}
-
-/**
- * Устанавливет значение многомерного масива
- *
- * @param array $k лист иерархии дерева
- * @param mixed $v параметр
- * @return array
- */
-function parse_key_to_array(array $k, $v)
-{
-    $r = array();
-    switch (count($k)) {
-        case 1: $r[$k[0]]                               = $v;
-            break;
-        case 2: $r[$k[0]][$k[1]]                        = $v;
-            break;
-        case 3: $r[$k[0]][$k[1]][$k[2]]                 = $v;
-            break;
-        case 4: $r[$k[0]][$k[1]][$k[2]][$k[3]]          = $v;
-            break;
-        case 5: $r[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]]   = $v;
-            break;
-        default : $r[$k[0]][$k[1]][$k[2]][$k[3]][$k[4]][] = $v;
-            break;
-    }
-    return $r;
 }
