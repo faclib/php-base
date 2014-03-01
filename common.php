@@ -196,19 +196,15 @@ function ak(array $array, $keys)
     $args = func_get_args();
     array_shift($args);
     foreach ($args as $k) {
-        if (!is_array($k)) {
-            $keys[] = $k;
-        } else {
-            $keys = array_merge($keys, $k);
-        }
+       $keys = am($keys, $k);
     }
     $keys = array_unique($keys);
 
-    foreach ($keys as $k) {
-        $r[$k] = $array[$k];
-    }
-
-    return $r;
+    return array_intersect_key($array, array_flip($keys));
+//    foreach ($keys as $k) {
+//        $r[$k] = $array[$k];
+//    }
+//    return $r;
 }
 
 /**
