@@ -13,7 +13,7 @@
 // Функция вызываемая при вызове dump()
 if (!isset($_ENV['dump.callback'])) {
     $_ENV['dump.callback'] = function($var) {
-        if (REMOTE_SERVER) {
+        if (@constant(REMOTE_SERVER)) {
             call_user_func('\CVarDumper::dump', $var);
             //CVarDumper::dump($var);
         } else {
@@ -182,7 +182,7 @@ function am($a)
 /**
  * Выбрать из масива определенные ключи
  *
- * @param array $array
+ * @param array $array исходный масив
  * @param array|string $keys First key
  * @param array|string Second key
  * @param array Etc...
