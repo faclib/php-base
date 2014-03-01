@@ -10,14 +10,11 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0"
+        "php": ">=5.3.0",
+        "mustangostang/spyc": "0.5.*",
+        "pimple/pimple": "1.*"
     },
     "autoload": {
         "files": ["common.php"]
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        }
     }
 }
