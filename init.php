@@ -1,10 +1,12 @@
-<?php
+<?php defined('SYSPATH') OR die('No direct script access.');
 /**
  * init.php file
  *
  * @author     Dmitriy Tyurin <fobia3d@gmail.com>
  * @copyright  Copyright (c) 2014 Dmitriy Tyurin
  */
+
+// defined('SYSPATH') OR die('No direct script access.');
 
 /*
 defined('ROOT')   or define('ROOT', (dirname(__DIR__)));

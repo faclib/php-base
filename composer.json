@@ -1,6 +1,6 @@
 {
     "name": "faclib/php-base-utils",
-    "description": "PHP-Base-Utils.",
+    "description": "PHP Base-Utils.",
     "license": "MIT",
     "type": "library",
     "authors": [
