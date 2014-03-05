@@ -1,4 +1,5 @@
-<?php defined('SYSPATH') OR die('No direct script access.');
+<?php 
+//defined('SYSPATH') OR die('No direct script access.');
 /**
  * init.php file
  *
