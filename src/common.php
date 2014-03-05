@@ -7,6 +7,39 @@
  * @copyright  (c) 2014 Dmitriy Tyurin
  *
  */
+
+// Падавление ошибок
+error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE);
+
+// Автокодировка
+mb_internal_encoding('UTF-8');
+
+/* * **********************************************
+ * CONSTANTS
+ * ********************************************** */
+
+// defined('ROOT')   or define('ROOT', (dirname(__DIR__)));
+// defined('BASE_DIR')   or define('BASE_DIR', (dirname(__DIR__)));
+// defined('HTML_DIR')   or define('HTML_DIR',   BASE_DIR . "/html");
+// defined('LOGS_DIR')   or define('LOGS_DIR',   BASE_DIR . "/logs");
+// defined('CACHE_DIR')  or define('CACHE_DIR',  BASE_DIR . "/cache");
+// defined('CONFIG_DIR') or define('CONFIG_DIR', BASE_DIR . "/config");
+
+
+// Начальное время
+if (!$_SERVER["REQUEST_TIME_FLOAT"]) {
+    $_SERVER["REQUEST_TIME_FLOAT"] = microtime(true);
+}
+if (!defined("TIME_START")) {
+    define("TIME_START", $_SERVER["REQUEST_TIME_FLOAT"]);
+}
+define('DS', DIRECTORY_SEPARATOR);
+define('BR', '<br />' . PHP_EOL);
+
+/** Указывае что скрипт был запущен через консоль */
+define('IS_CLI', !isset($_SERVER['HTTP_HOST']));
+define('REMOTE_SERVER', !IS_CLI && $_SERVER['REMOTE_ADDR'] != '127.0.0.1');
+
 /* * **********************************************
  * ENVIRONMENT
  * ********************************************** */
@@ -22,6 +55,8 @@ if (!isset($_ENV['dump.callback'])) {
         }
     };
 }
+
+require_once __DIR__.'/facBase.php';
 
 /* * **********************************************
  * FUNCTIONS
