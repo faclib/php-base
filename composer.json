@@ -1,6 +1,6 @@
 {
-    "name": "faclib/php-base-utils",
-    "description": "PHP Base Utils.",
+    "name": "faclib/base",
+    "description": "PHP Base functions",
     "license": "MIT",
     "type": "library",
     "authors": [
@@ -11,8 +11,7 @@
     ],
     "require": {
         "php": ">=5.3.0",
-        "mustangostang/spyc": "0.5.*",
-        "pimple/pimple": "1.*"
+        "mustangostang/spyc": "0.5.*"
     },
     "autoload": {
         "files": ["src/common.php"],
