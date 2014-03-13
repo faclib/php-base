@@ -8,7 +8,7 @@
 require_once __DIR__ . '/bootstrap.php';
 
 
-$f1 = parseFields('field1', 'fil', array('f1', 'f2'), 'f1');
+$f1 = parseFields('field1 , f1', 'fil', array('f1', 'f2'), 'f1');
 print_r($f1);
 
 $f2 = parseFields();

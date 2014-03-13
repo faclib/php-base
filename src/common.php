@@ -1,4 +1,4 @@
-<?php 
+<?php
 //defined('SYSPATH') OR die('No direct script access.');
 /**
  * Библиотека основный функций
@@ -13,6 +13,8 @@ error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE);
 
 // Автокодировка
 mb_internal_encoding('UTF-8');
+
+require_once __DIR__.'/facBase.php';
 
 /* * **********************************************
  * CONSTANTS
@@ -48,15 +50,13 @@ define('REMOTE_SERVER', !IS_CLI && $_SERVER['REMOTE_ADDR'] != '127.0.0.1');
 if (!isset($_ENV['dump.callback'])) {
     $_ENV['dump.callback'] = function($var) {
         if (@constant(REMOTE_SERVER) && REMOTE_SERVER) {
-            call_user_func('\CVarDumper::dump', $var);
-            //CVarDumper::dump($var);
+            // call_user_func('\CVarDumper::dump', $var);
+            \CVarDumper::dump($var, 10, true);
         } else {
             var_dump($var);
         }
     };
 }
-
-require_once __DIR__.'/facBase.php';
 
 /* * **********************************************
  * FUNCTIONS
@@ -86,9 +86,9 @@ function h($string, $print = false)
  */
 function print_pre($var)
 {
-    echo "<pre>\n";
+    echo "<pre>".PHP_EOL;
     print_r($var);
-    echo "\n</pre>";
+    echo PHP_EOL."</pre>";
 }
 
 /**
@@ -114,6 +114,9 @@ function throwException(\Exception $exception)
     throw $exception;
 }
 
+function ccallback($cb, $m) {
+    return new \CCallback($cb, $m);
+}
 /**
  * Сортировка масива $array по ключу $sortby.
  *
@@ -258,6 +261,9 @@ function parseFields()
         }
         $array = am($array, $var);
     }
+    array_walk($array, function(&$val) {
+        $val = trim($val);
+    });
     $array = array_unique($array);
     return array_values($array);
 }

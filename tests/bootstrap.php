@@ -3,9 +3,9 @@
  * @author Dmitriy Tyurin <fobia3d@gmail.com>
  */
 // Падавление ошибок
-error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE);
+//error_reporting(E_ALL & ~E_DEPRECATED & ~E_STRICT & ~E_NOTICE);
 // Автокодировка
-mb_internal_encoding('UTF-8');
+//mb_internal_encoding('UTF-8');
 
 $autoloadFile = __DIR__ . '/../vendor/autoload.php';
 if (!file_exists($autoloadFile)) {
