@@ -47,7 +47,7 @@ define('REMOTE_SERVER', !IS_CLI && $_SERVER['REMOTE_ADDR'] != '127.0.0.1');
 // Функция вызываемая при вызове dump()
 if (!isset($_ENV['dump.callback'])) {
     $_ENV['dump.callback'] = function($var) {
-        if (@constant(REMOTE_SERVER)) {
+        if (@constant(REMOTE_SERVER) && REMOTE_SERVER) {
             call_user_func('\CVarDumper::dump', $var);
             //CVarDumper::dump($var);
         } else {
